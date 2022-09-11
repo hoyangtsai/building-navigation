@@ -1,0 +1,84 @@
+nav {
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    inset-block-start: 1rem;
+}
+
+/* Remove the default list styling and create a flexible layout for the list */
+ul {
+    --nav-list-layout: column;
+    --nav-list-position: absolute;
+    --nav-list-padding: 2rem;
+    --nav-list-height: auto;
+    --nav-list-width: min(20rem, 100vw);
+    --nav-list-shadow: -5px 0 11px 0 rgb(0 0 0 / 0.2);
+    --nav-list-visibility: visible;
+
+    background: rgb(255, 255, 255);
+    box-shadow: var(--nav-list-shadow, none);
+    display: flex;
+    flex-direction: var(--nav-list-layout, row);
+    flex-wrap: wrap;
+    gap: 1rem;
+    height: var(--nav-list-height, 100%);
+    list-style: none;
+    margin: 0;
+    padding: var(--nav-list-padding, 0);
+    position: var(--nav-list-position, static);
+    inset-block-start: -1rem; /* Logical property. Equivalent to top: 0; */
+    inset-inline-end: -1rem; /* Logical property. Equivalent to right: 0; */
+    width: var(--nav-list-width, 100%);
+
+    transition: opacity 0.6s linear, visibility 0.3s linear;
+    visibility: var(--nav-list-visibility, visible);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    ul {
+        transition: transform 0.6s cubic-bezier(.68,-0.55,.27,1.55), visibility 0.3s linear;
+    }
+}
+
+  
+/* Hide the list on narrow viewports, if it comes after an element with
+aria-expanded set to "false". */
+[aria-expanded="false"] + ul {
+    transform: var(--nav-list-transform, translateX(100%));
+    visibility: hidden;
+}
+
+/* Basic link styling */
+a {
+    --text-color: var(--color-shades-dark);
+
+    border-block-end: 3px solid var(--border-color, transparent);
+    color: var(--text-color);
+    padding: 0.1rem;
+    text-decoration: none;
+}
+
+/* Change border-color and color for the active page */
+[aria-current="page"] {
+    --border-color: var(--color-highlight);
+    --text-color: var(--color-highlight);
+}
+
+/* Change the border-color on :hover and :focus */
+a:where(:hover, :focus) {
+    --border-color: var(--text-color);
+}
+
+/* Change border-color and color for the active page */
+[aria-current="page"] {
+    --border-color: var(--color-highlight);
+    --text-color: var(--color-highlight);
+}
+
+/* Reset button styling */
+button {
+    all: unset;
+    display: flex;
+    position: relative;
+    z-index: 1;
+}
